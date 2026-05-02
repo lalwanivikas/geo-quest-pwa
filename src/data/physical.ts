@@ -1,0 +1,178 @@
+export type PhysicalFeature = {
+  id: string
+  name: string
+  category: 'ocean' | 'sea' | 'river' | 'mountain' | 'desert' | 'lake'
+  region: string
+  clue: string
+}
+
+export const PHYSICAL_FEATURES: PhysicalFeature[] = [
+  {
+    id: 'pacific-ocean',
+    name: 'Pacific Ocean',
+    category: 'ocean',
+    region: 'Between Asia/Oceania and the Americas',
+    clue: 'The largest ocean, touching Japan, Australia, California, Chile, and many island nations.',
+  },
+  {
+    id: 'atlantic-ocean',
+    name: 'Atlantic Ocean',
+    category: 'ocean',
+    region: 'Between the Americas, Europe, and Africa',
+    clue: 'The ocean crossed by routes between New York, London, Lisbon, Dakar, and Rio.',
+  },
+  {
+    id: 'indian-ocean',
+    name: 'Indian Ocean',
+    category: 'ocean',
+    region: 'South of India, east of Africa, west of Australia',
+    clue: 'The ocean linking East Africa, the Arabian Peninsula, India, and Indonesia.',
+  },
+  {
+    id: 'arctic-ocean',
+    name: 'Arctic Ocean',
+    category: 'ocean',
+    region: 'Around the North Pole',
+    clue: 'The cold ocean north of Canada, Greenland, Russia, and Scandinavia.',
+  },
+  {
+    id: 'mediterranean-sea',
+    name: 'Mediterranean Sea',
+    category: 'sea',
+    region: 'Between Southern Europe, North Africa, and Western Asia',
+    clue: 'The sea touching Spain, France, Italy, Greece, Turkey, Egypt, and Morocco.',
+  },
+  {
+    id: 'caribbean-sea',
+    name: 'Caribbean Sea',
+    category: 'sea',
+    region: 'Southeast of the Gulf of Mexico',
+    clue: 'The sea around Cuba, Jamaica, Hispaniola, Puerto Rico, and the Lesser Antilles.',
+  },
+  {
+    id: 'red-sea',
+    name: 'Red Sea',
+    category: 'sea',
+    region: 'Between northeast Africa and the Arabian Peninsula',
+    clue: 'The narrow sea between Egypt/Sudan/Eritrea and Saudi Arabia/Yemen.',
+  },
+  {
+    id: 'black-sea',
+    name: 'Black Sea',
+    category: 'sea',
+    region: 'Between Eastern Europe, the Caucasus, and Turkey',
+    clue: 'The sea north of Turkey and south of Ukraine and Russia.',
+  },
+  {
+    id: 'nile',
+    name: 'Nile River',
+    category: 'river',
+    region: 'Northeast Africa',
+    clue: 'A north-flowing river strongly associated with Egypt and Sudan.',
+  },
+  {
+    id: 'amazon',
+    name: 'Amazon River',
+    category: 'river',
+    region: 'Northern South America',
+    clue: 'The huge river system crossing rainforest in Brazil, Peru, and nearby countries.',
+  },
+  {
+    id: 'mississippi',
+    name: 'Mississippi River',
+    category: 'river',
+    region: 'Central United States',
+    clue: 'A major north-south river draining much of the United States into the Gulf of Mexico.',
+  },
+  {
+    id: 'ganges',
+    name: 'Ganges River',
+    category: 'river',
+    region: 'Northern India and Bangladesh',
+    clue: 'A sacred and densely populated river system flowing toward the Bay of Bengal.',
+  },
+  {
+    id: 'yangtze',
+    name: 'Yangtze River',
+    category: 'river',
+    region: 'Central and eastern China',
+    clue: 'China’s long east-flowing river, connected with Shanghai’s wider region.',
+  },
+  {
+    id: 'danube',
+    name: 'Danube River',
+    category: 'river',
+    region: 'Central and southeastern Europe',
+    clue: 'A river passing through or along countries such as Austria, Hungary, Serbia, and Romania.',
+  },
+  {
+    id: 'himalayas',
+    name: 'Himalayas',
+    category: 'mountain',
+    region: 'South and Central Asia',
+    clue: 'The mountain range separating the Indian subcontinent from the Tibetan Plateau.',
+  },
+  {
+    id: 'andes',
+    name: 'Andes',
+    category: 'mountain',
+    region: 'Western South America',
+    clue: 'The long mountain spine running through countries such as Chile, Peru, Bolivia, and Colombia.',
+  },
+  {
+    id: 'alps',
+    name: 'Alps',
+    category: 'mountain',
+    region: 'Central Europe',
+    clue: 'The famous mountain range around Switzerland, Austria, northern Italy, and France.',
+  },
+  {
+    id: 'rockies',
+    name: 'Rocky Mountains',
+    category: 'mountain',
+    region: 'Western North America',
+    clue: 'A major mountain chain stretching through the western United States and Canada.',
+  },
+  {
+    id: 'atlas',
+    name: 'Atlas Mountains',
+    category: 'mountain',
+    region: 'Northwest Africa',
+    clue: 'A mountain range across Morocco, Algeria, and Tunisia.',
+  },
+  {
+    id: 'sahara',
+    name: 'Sahara Desert',
+    category: 'desert',
+    region: 'North Africa',
+    clue: 'The enormous desert stretching across countries such as Morocco, Algeria, Libya, Egypt, and Sudan.',
+  },
+  {
+    id: 'gobi',
+    name: 'Gobi Desert',
+    category: 'desert',
+    region: 'Mongolia and northern China',
+    clue: 'A cold desert associated with Mongolia and China.',
+  },
+  {
+    id: 'arabian',
+    name: 'Arabian Desert',
+    category: 'desert',
+    region: 'Arabian Peninsula',
+    clue: 'A large desert covering much of Saudi Arabia and neighboring states.',
+  },
+  {
+    id: 'atacama',
+    name: 'Atacama Desert',
+    category: 'desert',
+    region: 'Northern Chile',
+    clue: 'An extremely dry desert on the Pacific side of South America.',
+  },
+  {
+    id: 'lake-victoria',
+    name: 'Lake Victoria',
+    category: 'lake',
+    region: 'East Africa',
+    clue: 'A huge lake bordered by Tanzania, Uganda, and Kenya.',
+  },
+]
