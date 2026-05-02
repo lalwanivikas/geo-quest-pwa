@@ -29,7 +29,6 @@ import {
   explainQuestion,
   mulberry32,
   seedFromText,
-  topicLabel,
   type GameMode,
   type Question,
   type RandomSource,
@@ -94,6 +93,22 @@ function formatWeakSpot(topicId: string): string {
     PHYSICAL_FEATURES.find((feature) => feature.id === topicId)?.name ??
     topicId
   )
+}
+
+function getPreAnswerHint(question: Question): string {
+  if (question.kind === 'mapTap') {
+    return 'Tap the map when you are ready.'
+  }
+
+  if (question.kind === 'outline') {
+    return 'Study the outline, then choose.'
+  }
+
+  if (question.kind === 'flag') {
+    return 'Use the flag only. No reveal until you commit.'
+  }
+
+  return 'Choose an answer to lock it in.'
 }
 
 function App() {
@@ -308,7 +323,7 @@ function App() {
               <p className="feedback__label">
                 {isCorrect ? 'Correct' : selectedIsWrong ? 'Close, lock this in' : 'Choose one'}
               </p>
-              <p>{canContinue ? explainQuestion(question) : topicLabel(question)}</p>
+              <p>{canContinue ? explainQuestion(question) : getPreAnswerHint(question)}</p>
             </div>
             <button
               className="next-button"
@@ -439,6 +454,15 @@ function QuestionStage({
     return (
       <div className="outline-stage">
         <CountryOutline country={question.country} />
+      </div>
+    )
+  }
+
+  if (question.kind === 'physicalCategory' && question.feature) {
+    return (
+      <div className="clue-stage">
+        <p>{question.eyebrow}</p>
+        <strong>{question.feature.clue}</strong>
       </div>
     )
   }

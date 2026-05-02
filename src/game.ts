@@ -145,18 +145,6 @@ export function shuffle<T>(items: T[], rng: RandomSource): T[] {
   return copy
 }
 
-export function topicLabel(question: Question): string {
-  if (question.country) {
-    return `${question.country.flag} ${question.country.name}`
-  }
-
-  if (question.feature) {
-    return question.feature.name
-  }
-
-  return question.eyebrow
-}
-
 export function explainQuestion(question: Question): string {
   if (question.kind === 'physicalCategory' && question.feature) {
     return `${question.feature.name} is a ${CATEGORY_LABELS[question.feature.category].toLowerCase()} in ${question.feature.region}.`
@@ -321,19 +309,45 @@ function makePhysicalCategoryQuestion(
   mode: GameMode,
 ): ChoiceQuestion {
   const physicalFeature = sample(PHYSICAL_FEATURES, rng)
-  const answer = CATEGORY_LABELS[physicalFeature.category]
-  const categoryOptions = Object.values(CATEGORY_LABELS).filter(
-    (category) => category !== answer,
+  const sameCategoryDistractors = PHYSICAL_FEATURES.filter(
+    (featureItem) =>
+      featureItem.id !== physicalFeature.id &&
+      featureItem.category === physicalFeature.category,
   )
+  const otherDistractors = PHYSICAL_FEATURES.filter(
+    (featureItem) => featureItem.id !== physicalFeature.id,
+  )
+  const fallbackDistractors = otherDistractors.filter(
+    (featureItem) =>
+      !sameCategoryDistractors.some(
+        (sameCategoryItem) => sameCategoryItem.id === featureItem.id,
+      ),
+  )
+  const distractors =
+    sameCategoryDistractors.length >= 3
+      ? shuffle(sameCategoryDistractors, rng).slice(0, 3)
+      : [
+          ...shuffle(sameCategoryDistractors, rng),
+          ...shuffle(fallbackDistractors, rng).slice(
+            0,
+            3 - sameCategoryDistractors.length,
+          ),
+        ]
 
   return {
     id: `physicalCategory:${physicalFeature.id}:${Math.floor(rng() * 100000)}`,
     kind: 'physicalCategory',
     mode,
-    prompt: `${physicalFeature.name} is what kind of feature?`,
-    eyebrow: 'Earth shape',
-    answer,
-    options: shuffle([answer, ...shuffle(categoryOptions, rng).slice(0, 3)], rng),
+    prompt: 'Which feature matches this clue?',
+    eyebrow: CATEGORY_LABELS[physicalFeature.category],
+    answer: physicalFeature.name,
+    options: shuffle(
+      [
+        physicalFeature.name,
+        ...distractors.map((featureItem) => featureItem.name),
+      ],
+      rng,
+    ),
     feature: physicalFeature,
   }
 }
