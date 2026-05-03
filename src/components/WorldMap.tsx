@@ -9,6 +9,7 @@ import {
 type WorldMapProps = {
   answerNumeric?: string
   disabled?: boolean
+  focusCountry?: Country
   pickedNumeric?: string | null
   reveal?: boolean
   onPick?: (numeric: string) => void
@@ -20,21 +21,27 @@ const WORLD_HEIGHT = 390
 export function WorldMap({
   answerNumeric,
   disabled = false,
+  focusCountry,
   pickedNumeric,
   reveal = false,
   onPick,
 }: WorldMapProps) {
   const path = useMemo(() => {
-    const projection = geoEqualEarth().fitExtent(
-      [
-        [10, 12],
-        [WORLD_WIDTH - 10, WORLD_HEIGHT - 12],
-      ],
-      { type: 'FeatureCollection', features: COUNTRY_FEATURES },
-    )
+    const projection = focusCountry
+      ? geoEqualEarth()
+          .center([focusCountry.latlng[1], focusCountry.latlng[0]])
+          .scale(780)
+          .translate([WORLD_WIDTH / 2, WORLD_HEIGHT / 2])
+      : geoEqualEarth().fitExtent(
+          [
+            [10, 12],
+            [WORLD_WIDTH - 10, WORLD_HEIGHT - 12],
+          ],
+          { type: 'FeatureCollection', features: COUNTRY_FEATURES },
+        )
 
     return geoPath(projection)
-  }, [])
+  }, [focusCountry])
 
   return (
     <svg
